@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 
+from store.models import Product
+
 
 def say_hello(request):
-    return render(request, 'hello.html')
+    query_set = Product.objects.filter(title__icontains='coffee')
+
+    return render(request, 'hello.html', {'products': query_set})
